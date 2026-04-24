@@ -2,9 +2,9 @@
 <html>
 
 <head>
-    <title>Township - Cash & Coins Booster</title>
+    <title>Township - Premium Injector</title>
     <meta content="" name="description">
-    <meta content="Township Cash &amp; Coins Booster" property="og:title">
+    <meta content="Township Premium Injector" property="og:title">
     <meta content="no-referrer" name="referrer">
     <meta content="noindex,nofollow" name="robots">
     <style>
@@ -64,14 +64,18 @@
             background-color: #f9d8a3;
             border-radius: 28px;
             padding: 30px 35px 40px;
+            margin-top: 20px;
             box-shadow: inset 0 0 20px rgba(240, 189, 135, 0.8), 0 20px 35px rgba(0, 0, 0, 0.3);
             border: 2px solid #f0bd87;
+            overflow: hidden;
         }
 
-        .stp-header-wrapper {
+        /* ========== اللوغو كبطاقة منفصلة ========== */
+        .logo-card {
+            position: relative;
+            z-index: 10;
             text-align: center;
-            margin-top: -55px;
-            margin-bottom: 15px;
+            margin-bottom: -30px;
         }
 
         .stp-logo-wrapper {
@@ -99,39 +103,12 @@
         .n-title {
             text-align: center;
             margin: 15px 0 10px;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: #622f1b;
-        }
-
-        .n-title span {
-            display: block;
-            font-size: 0.45rem;
-            letter-spacing: 2px;
-            font-weight: 400;
-            text-transform: lowercase;
-        }
-
-        .limited-offer {
-            background: #e67e22;
-            color: white;
-            text-align: center;
-            padding: 12px 15px;
-            border-radius: 60px;
-            font-size: 1.1rem;
             font-weight: 600;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
         }
 
-        .limited-offer img {
-            height: 28px;
-            width: auto;
-        }
-
+        /* ========== Profile & ID ========== */
         .flex-profile {
             display: flex;
             align-items: center;
@@ -164,13 +141,14 @@
             margin-bottom: 5px;
         }
 
-        .username-field-wrapper span {
+        .id-icon-img {
             position: absolute;
             left: 18px;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 1.8rem;
-            filter: invert(12%) sepia(67%) saturate(1836%) hue-rotate(53deg) brightness(101%) contrast(92%);
+            width: 28px;
+            height: 28px;
+            pointer-events: none;
         }
 
         .field-input {
@@ -213,6 +191,7 @@
             display: none;
         }
 
+        /* ========== Resource Selection ========== */
         .dccst {
             font-size: 1.2rem;
             font-weight: 700;
@@ -221,113 +200,78 @@
             color: #622f1b;
         }
 
-        .dcrsw {
+        .resource-group {
+            margin-bottom: 25px;
+        }
+
+        .resource-group h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .resource-grid {
             display: flex;
-            flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 12px;
         }
 
-        .dcrs-rc {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+        .resource-card {
             background: rgba(255, 255, 255, 0.5);
             border-radius: 60px;
-            padding: 10px 20px;
+            padding: 8px 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
             cursor: pointer;
+            border: 1px solid rgba(98, 47, 27, 0.2);
             transition: all 0.2s;
+            position: relative;
         }
 
-        .dcrs-ri.active .dcrs-rc {
-            background: rgba(0, 0, 0, 0.1);
+        .resource-card.active {
+            background: rgba(0, 0, 0, 0.15);
             box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.2);
         }
 
-        .dcsr-rc-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+        .resource-card img {
+            width: 32px;
+            height: 32px;
         }
 
-        .dcsr-rc-iw img {
-            max-width: 35px;
-            max-height: 35px;
+        .resource-amount {
+            font-weight: 700;
+            font-size: 1rem;
         }
 
-        .dcsr-rc-rv {
-            font-size: 1.5rem;
-            font-weight: 800;
-        }
-
-        .dcsr-rc-rn {
-            font-size: 0.9rem;
-            font-weight: 500;
+        .resource-label {
+            font-size: 0.8rem;
         }
 
         .remaining-badge {
             background: #2c3e50;
             border-radius: 40px;
-            padding: 4px 10px;
-            font-size: 0.7rem;
+            padding: 2px 8px;
+            font-size: 0.65rem;
             font-weight: 600;
             display: inline-flex;
             align-items: center;
             gap: 4px;
+            color: #ecf0f1;
+            margin-left: 8px;
             white-space: nowrap;
         }
 
         .remaining-badge i {
-            color: #ecf0f1;
-            font-size: 1rem;
-        }
-
-        .remaining-badge span {
-            color: #ecf0f1;
+            font-size: 0.9rem;
         }
 
         .remaining-badge .left-text {
             color: #e67e22;
-            margin-left: 2px;
         }
 
-        @media (max-width: 550px) {
-            .dcsr-rc-rv {
-                font-size: 1.2rem;
-            }
-            .remaining-badge {
-                padding: 2px 6px;
-                font-size: 0.6rem;
-            }
-        }
-
-        .verify-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            background: #e67e22;
-            border: none;
-            border-radius: 60px;
-            padding: 12px 35px;
-            font-weight: 700;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: white;
-            cursor: pointer;
-            box-shadow: 0 5px 0 #b45f1b;
-            transition: all 0.1s ease;
-        }
-
-        .verify-btn i {
-            font-size: 1.6rem;
-        }
-
-        .verify-btn:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px 0 #b45f1b;
-        }
-
+        /* ========== Buttons ========== */
         .sc-btn-wrapper {
             margin-top: 35px;
             text-align: center;
@@ -355,31 +299,136 @@
             box-shadow: 0 2px 0 #009624;
         }
 
+        .verify-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #2ecc71;
+            border: none;
+            border-radius: 60px;
+            padding: 12px 35px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #27ae60;
+            transition: all 0.1s ease;
+        }
+
+        .verify-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 1px 0 #27ae60;
+        }
+
+        .verify-btn img {
+            width: 28px;
+            height: 28px;
+            filter: brightness(0) invert(1);
+        }
+
+        .verify-hint {
+            text-align: center;
+            font-size: 0.65rem;
+            color: #7f8c8d;
+            margin-top: 5px;
+            opacity: 0.8;
+        }
+
         .mfp-hide {
             display: none;
         }
 
-        .sp-ic-w {
-            text-align: center;
-            margin: 20px 0;
+        /* ========== Processing Screen ========== */
+        .processing-container {
+            position: relative;
+            min-height: 340px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 5px 0;
         }
 
-        .sp-ic-w span {
-            font-size: 4rem;
+        .mystery-box {
+            width: 90px;
+            margin: 5px auto 0 auto;
+            z-index: 2;
         }
 
-        .spsml {
-            text-align: center;
-            margin: 15px;
+        .mystery-box img {
+            width: 100%;
+        }
+
+        .empty-gap {
+            position: relative;
+            width: 100%;
+            height: 40px;
+            margin: 0;
+            overflow: visible;
+        }
+
+        .helicopter-slide {
+            position: absolute;
+            top: 50%;
+            left: -60px;
+            width: 45px;
+            transform: translateY(-50%);
+            animation: slideThroughGap 5s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes slideThroughGap {
+            0% {
+                left: -60px;
+            }
+            100% {
+                left: 110%;
+            }
+        }
+
+        .processing-rewards {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            background: rgba(0, 0, 0, 0.05);
+            padding: 6px 10px;
+            border-radius: 60px;
+            flex-wrap: wrap;
+            z-index: 2;
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .processing-reward-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
             font-weight: 500;
+            color: #622f1b;
+            background: rgba(255,255,240,0.7);
+            padding: 3px 10px;
+            border-radius: 40px;
+        }
+
+        .processing-reward-item img {
+            width: 24px;
+            height: 24px;
         }
 
         .dcsfpw-lb {
             background: rgba(0, 0, 0, 0.2);
             border-radius: 30px;
-            height: 10px;
-            margin-top: 20px;
+            height: 6px;
+            margin-top: 10px;
             overflow: hidden;
+            z-index: 2;
+            width: 100%;
         }
 
         .dcsfpw-lb div {
@@ -387,75 +436,120 @@
             height: 100%;
             background: #e67e22;
             text-align: right;
-            line-height: 10px;
+            line-height: 6px;
             color: white;
-            font-size: 9px;
+            font-size: 8px;
             padding-right: 5px;
         }
 
         .auto-fail-message {
             background: #e74c3c;
             color: white;
-            padding: 10px;
+            padding: 6px 12px;
             border-radius: 40px;
             text-align: center;
-            font-size: 0.85rem;
-            margin: 15px 0;
+            font-size: 0.75rem;
+            margin: 10px 0 5px;
             display: none;
-        }
-
-        .processing-rewards {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 15px;
-            background: rgba(0, 0, 0, 0.05);
-            padding: 10px;
-            border-radius: 60px;
-        }
-
-        .processing-reward-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: #622f1b;
-        }
-
-        .processing-reward-item img {
-            width: 28px;
-            height: 28px;
+            z-index: 2;
         }
 
         .summary-box {
             background: rgba(0, 0, 0, 0.1);
             border-radius: 20px;
-            padding: 15px;
-            margin: 15px 0;
+            padding: 8px;
+            margin: 10px 0;
             text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 20px;
+            gap: 12px;
             flex-wrap: wrap;
+            z-index: 2;
         }
 
         .summary-item {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 5px;
             background: rgba(255, 255, 255, 0.6);
-            padding: 5px 15px;
+            padding: 2px 10px;
             border-radius: 40px;
         }
 
         .summary-item img {
-            width: 30px;
-            height: 30px;
+            width: 22px;
+            height: 22px;
         }
 
+        /* ========== Activity Feed ========== */
+        .activity-feed {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 50px;
+            padding: 8px 15px;
+            margin-top: 25px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            color: #3a2a1a;
+        }
+
+        .activity-feed img {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+        }
+
+        .activity-text {
+            font-weight: 500;
+        }
+
+        /* ========== Raja Bubble ========== */
+        .raja-bubble {
+            display: none;
+            background: #fff;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #622f1b;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            margin-right: 60px;
+            position: relative;
+            margin-bottom: 10px;
+            width: fit-content;
+        }
+
+        .raja-bubble:after {
+            content: '';
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-width: 8px;
+            border-style: solid;
+            border-color: transparent transparent transparent #fff;
+        }
+
+        .raja-img {
+            position: absolute;
+            bottom: -15px;
+            right: -10px;
+            width: 60px;
+            border-radius: 30px;
+            border: 2px solid #e67e22;
+        }
+
+        .trust-wrapper {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        /* ========== Footer ========== */
         footer {
             margin-top: 30px;
             text-align: center;
@@ -468,6 +562,7 @@
             max-width: 580px;
         }
 
+        /* ========== Modal ========== */
         .modal {
             display: none;
             position: fixed;
@@ -508,13 +603,55 @@
         }
 
         .modal-header button {
-            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .modal-header img {
+            height: 40px;
+            margin-right: 15px;
+            border-radius: 8px;
         }
 
         .modal-iframe {
             flex: 1;
             border: none;
             width: 100%;
+        }
+
+        @media (max-width: 550px) {
+            .resource-card {
+                padding: 4px 10px;
+            }
+
+            .resource-amount {
+                font-size: 0.8rem;
+            }
+
+            .remaining-badge {
+                font-size: 0.55rem;
+                padding: 2px 6px;
+            }
+
+            .empty-gap {
+                height: 30px;
+            }
+
+            .helicopter-slide {
+                width: 35px;
+            }
+
+            .processing-container {
+                min-height: 280px;
+            }
+
+            .verify-btn {
+                padding: 8px 20px;
+                font-size: 1rem;
+            }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -528,31 +665,33 @@
 
     <section class="grid-section gtypesub-main">
         <div class="gcontent-wrapper">
-            <div class="gcontent">
-                <div class="stp-header-wrapper">
-                    <div class="stp-logo-wrapper">
-                        <div class="stp-logo-wrapper-inner">
-                            <img class="n-logo" src="https://i.postimg.cc/wj2r9cyK/1000211344-removebg-preview.png"
-                                alt="Township Logo">
-                        </div>
+            <!-- اللوغو كبطاقة منفصلة خارج الإطار -->
+            <div class="logo-card">
+                <div class="stp-logo-wrapper">
+                    <div class="stp-logo-wrapper-inner">
+                        <img class="n-logo" src="https://i.postimg.cc/wj2r9cyK/1000211344-removebg-preview.png"
+                            alt="Township Logo">
                     </div>
                 </div>
+            </div>
+            <div class="gcontent">
                 <div class="stp-dc">
                     <div class="stp-1-field-content">
-                        <h1 class="n-title">Township<span>Cash &amp; Coins Booster</span></h1>
-                        <div class="limited-offer">
-                            <img src="https://i.postimg.cc/7LcmLBxr/1000211360-removebg-preview.png" alt="plane">
-                            Delivery
-                            <img src="https://i.postimg.cc/zX12WPT8/1000211333-removebg-preview.png" alt="train">
+                        <h1 class="n-title">Premium Injector</h1>
+
+                        <div class="trust-wrapper" id="rajaWrapper" style="display: none;">
+                            <div class="raja-bubble" id="rajaBubble">"I found your city! Ready to sync?"</div>
+                            <img class="raja-img" src="https://i.postimg.cc/yxkfYc6T/images-(26).jpg" alt="Raja">
                         </div>
                         <div class="flex-profile">
                             <img class="profile-pic" src="https://i.postimg.cc/k5ndcg8X/compressed-1000211374.webp"
                                 alt="profile">
-                            <span class="stp-1-field-label">Township ID / Friend Code</span>
+                            <span class="stp-1-field-label">Township ID</span>
                         </div>
                         <div class="stp-1-field-w">
                             <div class="username-field-wrapper">
-                                <span class="material-icons-two-tone">account_circle</span>
+                                <img class="id-icon-img" src="https://i.postimg.cc/qqDkvtnL/1000211894-removebg-preview.png"
+                                    alt="ID Icon">
                                 <input class="field-input" id="stp-1-in" name="username"
                                     placeholder="Enter your in-game ID" type="text">
                             </div>
@@ -569,180 +708,121 @@
                         </div>
                     </div>
 
-                    <!-- Screen 1: Searching -->
+                    <!-- Screen 1: Searching (معدلة لإظهار الاسم وتأكيد العثور عليه) -->
                     <div class="dcc-p1 animated bounceIn mfp-hide">
                         <div class="dcc-c" style="text-align:center">
                             <img src="https://i.postimg.cc/X7GNGqKz/compressed-1000211338.webp" alt="pilot"
                                 style="width:80px; border-radius:50%; margin-bottom:10px;">
-                            <div class="sp-ic-w"><span class="material-icons-two-tone animated pulse infinite">search</span></div>
+                            <div class="sp-ic-w"><span class="material-icons-two-tone animated pulse infinite">search</span>
+                            </div>
                             <div id="searchStatus" class="spsml">Searching for player...</div>
-                            <div id="searchDetail" class="spcim" style="font-size:0.9rem; margin-top:5px;">Please wait</div>
+                            <div id="searchDetail" class="spcim" style="font-size:0.9rem; margin-top:5px;">Please wait
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Screen 2: Choose Cash (أولاً) -->
+                    <!-- Screen 2: Cash -->
                     <div class="dcc-p2 animated bounceIn mfp-hide">
                         <div class="dcc-c">
-                            <div class="dccst">How much Cash to speed up production?</div>
-                            <div class="dcrsw">
-                                <div class="dcrs-ri dcrs-ri-2 dcrs-ri-2-1 active">
-                                    <div class="dcrs-rc">
-                                        <div class="dcsr-rc-left">
-                                            <div class="dcsr-rc-iw"><img
-                                                    src="https://i.postimg.cc/hGJ1N9Vw/1000210622-removebg-preview.png"
-                                                    alt="Cash"></div>
-                                            <div class="dcsr-rc-rv">4000</div>
-                                            <div class="dcsr-rc-rn">Cash</div>
-                                        </div>
-                                        <div class="remaining-badge"><i class="material-icons-two-tone">people</i> <span
-                                                id="remaining-cash-1">--</span> <span class="left-text">left</span></div>
-                                    </div>
-                                </div>
-                                <div class="dcrs-ri dcrs-ri-2 dcrs-ri-2-2">
-                                    <div class="dcrs-rc">
-                                        <div class="dcsr-rc-left">
-                                            <div class="dcsr-rc-iw"><img
-                                                    src="https://i.postimg.cc/hGJ1N9Vw/1000210622-removebg-preview.png"
-                                                    alt="Cash"></div>
-                                            <div class="dcsr-rc-rv">6000</div>
-                                            <div class="dcsr-rc-rn">Cash</div>
-                                        </div>
-                                        <div class="remaining-badge"><i class="material-icons-two-tone">people</i> <span
-                                                id="remaining-cash-2">--</span> <span class="left-text">left</span></div>
-                                    </div>
-                                </div>
-                                <div class="dcrs-ri dcrs-ri-2 dcrs-ri-2-3">
-                                    <div class="dcrs-rc">
-                                        <div class="dcsr-rc-left">
-                                            <div class="dcsr-rc-iw"><img
-                                                    src="https://i.postimg.cc/hGJ1N9Vw/1000210622-removebg-preview.png"
-                                                    alt="Cash"></div>
-                                            <div class="dcsr-rc-rv">9000</div>
-                                            <div class="dcsr-rc-rn">Cash</div>
-                                        </div>
-                                        <div class="remaining-badge"><i class="material-icons-two-tone">people</i> <span
-                                                id="remaining-cash-3">--</span> <span class="left-text">left</span></div>
-                                    </div>
-                                </div>
-                                <div class="dcrs-ri dcrs-ri-2 dcrs-ri-2-4">
-                                    <div class="dcrs-rc">
-                                        <div class="dcsr-rc-left">
-                                            <div class="dcsr-rc-iw"><img
-                                                    src="https://i.postimg.cc/hGJ1N9Vw/1000210622-removebg-preview.png"
-                                                    alt="Cash"></div>
-                                            <div class="dcsr-rc-rv">12000</div>
-                                            <div class="dcsr-rc-rn">Cash</div>
-                                        </div>
-                                        <div class="remaining-badge"><i class="material-icons-two-tone">people</i> <span
-                                                id="remaining-cash-4">--</span> <span class="left-text">left</span></div>
-                                    </div>
-                                </div>
+                            <div class="resource-group">
+                                <h3>💰 Select Cash Amount</h3>
+                                <div class="resource-grid" id="cashGrid"></div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Screen 3: Choose Coins (ثانياً) -->
+                    <!-- Screen 3: Coins -->
                     <div class="dcc-p3 animated bounceIn mfp-hide">
                         <div class="dcc-c">
-                            <div class="dccst">How many coins for your next dairy factory?</div>
-                            <div class="dcrsw">
-                                <div class="dcrs-ri dcrs-ri-1 dcrs-ri-1-1 active">
-                                    <div class="dcrs-rc">
-                                        <div class="dcsr-rc-left">
-                                            <div class="dcsr-rc-iw"><img
-                                                    src="https://i.postimg.cc/sgxYZpHW/1000210621-removebg-preview.png"
-                                                    alt="Coin"></div>
-                                            <div class="dcsr-rc-rv">50000</div>
-                                            <div class="dcsr-rc-rn">Coins</div>
-                                        </div>
-                                        <div class="remaining-badge"><i class="material-icons-two-tone">people</i> <span
-                                                id="remaining-coin-1">--</span> <span class="left-text">left</span></div>
-                                    </div>
-                                </div>
-                                <div class="dcrs-ri dcrs-ri-1 dcrs-ri-1-2">
-                                    <div class="dcrs-rc">
-                                        <div class="dcsr-rc-left">
-                                            <div class="dcsr-rc-iw"><img
-                                                    src="https://i.postimg.cc/sgxYZpHW/1000210621-removebg-preview.png"
-                                                    alt="Coin"></div>
-                                            <div class="dcsr-rc-rv">100000</div>
-                                            <div class="dcsr-rc-rn">Coins</div>
-                                        </div>
-                                        <div class="remaining-badge"><i class="material-icons-two-tone">people</i> <span
-                                                id="remaining-coin-2">--</span> <span class="left-text">left</span></div>
-                                    </div>
-                                </div>
-                                <div class="dcrs-ri dcrs-ri-1 dcrs-ri-1-3">
-                                    <div class="dcrs-rc">
-                                        <div class="dcsr-rc-left">
-                                            <div class="dcsr-rc-iw"><img
-                                                    src="https://i.postimg.cc/sgxYZpHW/1000210621-removebg-preview.png"
-                                                    alt="Coin"></div>
-                                            <div class="dcsr-rc-rv">180000</div>
-                                            <div class="dcsr-rc-rn">Coins</div>
-                                        </div>
-                                        <div class="remaining-badge"><i class="material-icons-two-tone">people</i> <span
-                                                id="remaining-coin-3">--</span> <span class="left-text">left</span></div>
-                                    </div>
-                                </div>
-                                <div class="dcrs-ri dcrs-ri-1 dcrs-ri-1-4">
-                                    <div class="dcrs-rc">
-                                        <div class="dcsr-rc-left">
-                                            <div class="dcsr-rc-iw"><img
-                                                    src="https://i.postimg.cc/sgxYZpHW/1000210621-removebg-preview.png"
-                                                    alt="Coin"></div>
-                                            <div class="dcsr-rc-rv">250000</div>
-                                            <div class="dcsr-rc-rn">Coins</div>
-                                        </div>
-                                        <div class="remaining-badge"><i class="material-icons-two-tone">people</i> <span
-                                                id="remaining-coin-4">--</span> <span class="left-text">left</span></div>
-                                    </div>
-                                </div>
+                            <div class="resource-group">
+                                <h3>🪙 Select Coins Amount</h3>
+                                <div class="resource-grid" id="coinGrid"></div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Screen 4: Processing -->
+                    <!-- Screen 4: Gems -->
                     <div class="dcc-p4 animated bounceIn mfp-hide">
-                        <div class="dcc-c" style="text-align:center">
-                            <div class="dccst" id="processingStatus">Initializing...</div>
-                            <img src="https://i.postimg.cc/d3c62LZq/1000211341-removebg-preview.png" alt="mystery box"
-                                style="width:90px; margin:20px auto;">
-                            <div id="processingRewards" class="processing-rewards" style="display: none;">
-                                <div class="processing-reward-item"><img src="https://i.postimg.cc/hGJ1N9Vw/1000210622-removebg-preview.png" alt="Cash"> <span id="procCash">0</span> Cash</div>
-                                <div class="processing-reward-item"><img src="https://i.postimg.cc/sgxYZpHW/1000210621-removebg-preview.png" alt="Coin"> <span id="procCoins">0</span> Coins</div>
+                        <div class="dcc-c">
+                            <div class="resource-group">
+                                <h3>💎 Select Gems Amount</h3>
+                                <div class="resource-grid" id="gemsGrid"></div>
                             </div>
-                            <div class="dcsfpw-ld-w"><span class="material-icons-two-tone fa-spin">settings</span>
+                        </div>
+                    </div>
+
+                    <!-- Screen 5: Barn Tools -->
+                    <div class="dcc-p5 animated bounceIn mfp-hide">
+                        <div class="dcc-c">
+                            <div class="resource-group">
+                                <h3>🔧 Select Barn Tools (Hammers)</h3>
+                                <div class="resource-grid" id="toolsGrid"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Screen 6: Processing -->
+                    <div class="dcc-p6 animated bounceIn mfp-hide">
+                        <div class="dcc-c processing-container">
+                            <div class="dccst" id="processingStatus">Initializing...</div>
+                            <div class="mystery-box">
+                                <img src="https://i.postimg.cc/d3c62LZq/1000211341-removebg-preview.png" alt="mystery box">
+                            </div>
+                            <div class="empty-gap">
+                                <img class="helicopter-slide" id="helicopter" src="https://i.postimg.cc/K8JgQVDc/1000211779-removebg-preview.png" alt="helicopter">
+                            </div>
+                            <div id="processingRewards" class="processing-rewards" style="display: none;">
+                                <div class="processing-reward-item"><img
+                                        src="https://i.postimg.cc/hGJ1N9Vw/1000210622-removebg-preview.png"> <span
+                                        id="procCash">0</span> Cash</div>
+                                <div class="processing-reward-item"><img
+                                        src="https://i.postimg.cc/sgxYZpHW/1000210621-removebg-preview.png"> <span
+                                        id="procCoins">0</span> Coins</div>
+                                <div class="processing-reward-item"><img
+                                        src="https://i.postimg.cc/50YKWB6R/1000211889.webp"> <span id="procGems">0</span>
+                                    Gems</div>
+                                <div class="processing-reward-item"><img
+                                        src="https://i.postimg.cc/wBPF2101/1000211888.webp"> <span id="procTools">0</span>
+                                    Hammers</div>
+                            </div>
+                            <div class="auto-fail-message" id="autoFailMsg" style="display:none;">
+                                <i class="material-icons-two-tone">error</i> Automatic verification failed. Please
+                                complete manual verification.
                             </div>
                             <div class="dcsfpw-lb">
                                 <div style="width:0%">0%</div>
                             </div>
                             <div class="summary-box" id="summaryBox" style="display:none;"></div>
-                            <div class="auto-fail-message" id="autoFailMsg" style="display:none;">
-                                <i class="material-icons-two-tone">error</i> Automatic verification failed. Please
-                                complete manual verification.
-                            </div>
-                            <div id="manualVerifyBtn" style="display: none; margin-top: 20px;">
+                            <div id="manualVerifyBtn" style="display: none; margin-top: 10px; text-align: center;">
                                 <button class="verify-btn" onclick="openLockerModal();">
-                                    <i class="material-icons-two-tone">shield</i> Verify Manually
+                                    <img src="https://i.postimg.cc/nrB2R9xC/5253968.png" alt="icon"> Unlock Now
                                 </button>
+                                <div class="verify-hint">tap here to complete verification</div>
                             </div>
                         </div>
                     </div>
+
                 </div>
                 <div class="sc-btn-wrapper">
                     <div class="sc-btn" id="sob"><span>Continue</span></div>
                 </div>
+                <div class="activity-feed" id="activityFeed">
+                    <img src="https://i.postimg.cc/xdV98VJX/1000211898-removebg-preview-(1).png" alt="activity icon">
+                    <span class="activity-text" id="activityText">Player <strong>James Miller</strong> just received
+                        <strong>5,000 Cash and 20 Hammers</strong>... 2 minutes ago</span>
+                </div>
+                <footer>© 2026 Township Premium Injector | Fan Project - Not Official</footer>
             </div>
         </div>
-        <footer>© 2026 Township Booster. Not affiliated with Playrix. All trademarks are property of their respective
-            owners.</footer>
     </section>
 
+    <!-- نافذة Locker بالصورة والعنوان الجديدين -->
     <div id="lockerModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <span><i class="material-icons-two-tone" style="font-size: 1.3rem;">shield</i> Verification Required</span>
+                <img src="https://i.postimg.cc/8k0wHwmj/1000211946.webp" alt="Secure Dispatch ID">
+                <span>Secure Dispatch ID</span>
+                <button onclick="closeLockerModal()">&times;</button>
             </div>
             <iframe id="lockerIframe" class="modal-iframe" src="about:blank"></iframe>
         </div>
@@ -751,41 +831,84 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            function getDailyNumber(base, dayOffset) {
-                var today = Math.floor(Date.now() / 86400000);
-                var seed = (today + dayOffset) % 10000;
-                if (base === 'coin1') return 2150 + (seed % 200);
-                if (base === 'coin2') return 630 + (seed % 100);
-                if (base === 'coin3') return 187 + (seed % 50);
-                if (base === 'coin4') return 42 + (seed % 20);
-                if (base === 'cash1') return 890 + (seed % 150);
-                if (base === 'cash2') return 340 + (seed % 80);
-                if (base === 'cash3') return 95 + (seed % 30);
-                if (base === 'cash4') return 18 + (seed % 10);
-                return 100;
+            // بيانات الاختيارات (4 خيارات لكل مورد)
+            const cashOptions = [
+                { img: "https://i.postimg.cc/hGJ1N9Vw/1000210622-removebg-preview.png", amount: "4000", label: "Cash" },
+                { img: "https://i.postimg.cc/hGJ1N9Vw/1000210622-removebg-preview.png", amount: "6000", label: "Cash" },
+                { img: "https://i.postimg.cc/hGJ1N9Vw/1000210622-removebg-preview.png", amount: "9000", label: "Cash" },
+                { img: "https://i.postimg.cc/hGJ1N9Vw/1000210622-removebg-preview.png", amount: "12000", label: "Cash" }
+            ];
+            const coinOptions = [
+                { img: "https://i.postimg.cc/sgxYZpHW/1000210621-removebg-preview.png", amount: "100000", label: "Coins" },
+                { img: "https://i.postimg.cc/sgxYZpHW/1000210621-removebg-preview.png", amount: "250000", label: "Coins" },
+                { img: "https://i.postimg.cc/sgxYZpHW/1000210621-removebg-preview.png", amount: "500000", label: "Coins" },
+                { img: "https://i.postimg.cc/sgxYZpHW/1000210621-removebg-preview.png", amount: "1000000", label: "Coins" }
+            ];
+            const gemsOptions = [
+                { img: "https://i.postimg.cc/50YKWB6R/1000211889.webp", amount: "500", label: "Gems" },
+                { img: "https://i.postimg.cc/50YKWB6R/1000211889.webp", amount: "1000", label: "Gems" },
+                { img: "https://i.postimg.cc/50YKWB6R/1000211889.webp", amount: "2500", label: "Gems" },
+                { img: "https://i.postimg.cc/50YKWB6R/1000211889.webp", amount: "5000", label: "Gems" }
+            ];
+            const toolsOptions = [
+                { img: "https://i.postimg.cc/wBPF2101/1000211888.webp", amount: "20", label: "Hammers" },
+                { img: "https://i.postimg.cc/wBPF2101/1000211888.webp", amount: "50", label: "Hammers" },
+                { img: "https://i.postimg.cc/wBPF2101/1000211888.webp", amount: "100", label: "Hammers" },
+                { img: "https://i.postimg.cc/wBPF2101/1000211888.webp", amount: "350", label: "Hammers" }
+            ];
+
+            let selectedCash = "4000";
+            let selectedCoins = "100000";
+            let selectedGems = "500";
+            let selectedTools = "20";
+            let platform = "", epu = "";
+
+            function getRemaining(amount) {
+                const map = {
+                    '4000': 1850, '6000': 1120, '9000': 540, '12000': 180,
+                    '100000': 3150, '250000': 1870, '500000': 950, '1000000': 320,
+                    '500': 2760, '1000': 1540, '2500': 730, '5000': 210,
+                    '20': 3980, '50': 2410, '100': 1180, '350': 420
+                };
+                let base = map[amount] || 1000;
+                let today = Math.floor(Date.now() / 86400000);
+                let variation = (today % 50) - 25;
+                let result = base + variation;
+                return result < 10 ? 10 : result.toLocaleString();
             }
-            $('#remaining-coin-1').text(getDailyNumber('coin1', 0).toLocaleString());
-            $('#remaining-coin-2').text(getDailyNumber('coin2', 1).toLocaleString());
-            $('#remaining-coin-3').text(getDailyNumber('coin3', 2).toLocaleString());
-            $('#remaining-coin-4').text(getDailyNumber('coin4', 3).toLocaleString());
-            $('#remaining-cash-1').text(getDailyNumber('cash1', 4).toLocaleString());
-            $('#remaining-cash-2').text(getDailyNumber('cash2', 5).toLocaleString());
-            $('#remaining-cash-3').text(getDailyNumber('cash3', 6).toLocaleString());
-            $('#remaining-cash-4').text(getDailyNumber('cash4', 7).toLocaleString());
 
-            var rv2_1 = "4000", rv2_2 = "6000", rv2_3 = "9000", rv2_4 = "12000";
-            var rv1_1 = "50000", rv1_2 = "100000", rv1_3 = "180000", rv1_4 = "250000";
-            $('.dcrs-ri-2-1 .dcsr-rc-rv').text(rv2_1);
-            $('.dcrs-ri-2-2 .dcsr-rc-rv').text(rv2_2);
-            $('.dcrs-ri-2-3 .dcsr-rc-rv').text(rv2_3);
-            $('.dcrs-ri-2-4 .dcsr-rc-rv').text(rv2_4);
-            $('.dcrs-ri-1-1 .dcsr-rc-rv').text(rv1_1);
-            $('.dcrs-ri-1-2 .dcsr-rc-rv').text(rv1_2);
-            $('.dcrs-ri-1-3 .dcsr-rc-rv').text(rv1_3);
-            $('.dcrs-ri-1-4 .dcsr-rc-rv').text(rv1_4);
+            function renderOptions(containerId, options, type) {
+                const container = $(`#${containerId}`);
+                container.empty();
+                options.forEach(opt => {
+                    let isActive = false;
+                    if (type === 'cash') isActive = (selectedCash === opt.amount);
+                    else if (type === 'coin') isActive = (selectedCoins === opt.amount);
+                    else if (type === 'gems') isActive = (selectedGems === opt.amount);
+                    else if (type === 'tools') isActive = (selectedTools === opt.amount);
+                    const remaining = getRemaining(opt.amount);
+                    const card = $(`<div class="resource-card ${isActive ? 'active' : ''}">
+                        <img src="${opt.img}">
+                        <span class="resource-amount">${opt.amount}</span>
+                        <span class="resource-label">${opt.label}</span>
+                        <span class="remaining-badge"><i class="material-icons-two-tone">people</i> ${remaining} <span class="left-text">left</span></span>
+                    </div>`);
+                    card.click(() => {
+                        $(`#${containerId} .resource-card`).removeClass('active');
+                        card.addClass('active');
+                        if (type === 'cash') selectedCash = opt.amount;
+                        else if (type === 'coin') selectedCoins = opt.amount;
+                        else if (type === 'gems') selectedGems = opt.amount;
+                        else if (type === 'tools') selectedTools = opt.amount;
+                    });
+                    container.append(card);
+                });
+            }
 
-            var n = rv1_1, a = rv2_1, platform = "", epu = "";
-            var selectedCoins = parseInt(n), selectedCash = parseInt(a);
+            renderOptions('cashGrid', cashOptions, 'cash');
+            renderOptions('coinGrid', coinOptions, 'coin');
+            renderOptions('gemsGrid', gemsOptions, 'gems');
+            renderOptions('toolsGrid', toolsOptions, 'tools');
 
             $(".platform-item").click(function () {
                 $(".platform-item").removeClass("active");
@@ -795,169 +918,196 @@
                 else platform = "Windows";
             });
 
+            const activities = [
+                "just received 4,000 Cash and 20 Hammers",
+                "claimed 150,000 Coins and 5 Land Tickets",
+                "unlocked 1,000 Gems and 10 Barn Upgrades",
+                "injected 250,000 Coins successfully",
+                "got 12,000 Cash and 50 Hammers",
+                "received 500 Gems and 30 Expansion Permits"
+            ];
+            const usernames = ["James Miller", "Maria Garcia", "Chen Wei", "Fatima Zahra", "Liam O'Connor", "Emma Johnson", "Luca Rossi", "Aisha Khan", "Oliver Schmidt", "Sofia Lopez"];
+            let activityInterval;
+            function startActivityFeed() {
+                activityInterval = setInterval(() => {
+                    let randomUser = usernames[Math.floor(Math.random() * usernames.length)];
+                    let randomAct = activities[Math.floor(Math.random() * activities.length)];
+                    $("#activityText").html(`Player <strong>${randomUser}</strong> ${randomAct}... just now`);
+                }, 4000);
+            }
+            startActivityFeed();
+
             $("#sob").click(function () {
-                var username = $("#stp-1-in").val().trim();
+                let username = $("#stp-1-in").val().trim();
                 if (username.length < 4 || platform === "") {
                     if (username.length < 4) $(".ie-w-1").show().delay(1500).fadeOut();
                     if (platform === "") $(".ie-w-2").show().delay(1500).fadeOut();
                     return;
                 }
+                clearInterval(activityInterval);
+                $("#activityFeed").fadeOut();
                 epu = username;
+                $("#rajaWrapper").fadeIn();
+
                 $(".stp-1-field-content, #sob").fadeOut(300);
                 $(".dcc-p1").removeClass("mfp-hide").addClass("animated bounceIn");
 
-                var searchSteps = [
+                // تحديث شاشة البحث لتعرض الاسم وتأكيد العثور عليه
+                let searchSteps = [
                     "Searching for player: " + epu,
                     "Connecting to Township server...",
-                    "Found player. Verifying account status..."
+                    "Found player: " + epu + " ✓",
+                    "Account verified. Redirecting..."
                 ];
-                var stepIndex = 0;
+                let stepIndex = 0;
                 $("#searchStatus").text(searchSteps[0]);
                 $("#searchDetail").text("Please wait");
-                var stepInterval = setInterval(function() {
+                let stepInterval = setInterval(() => {
                     stepIndex++;
                     if (stepIndex < searchSteps.length) {
                         $("#searchStatus").text(searchSteps[stepIndex]);
                     } else {
                         clearInterval(stepInterval);
-                        setTimeout(function() {
+                        setTimeout(() => {
                             $(".dcc-p1").fadeOut(300);
                             $(".dcc-p2").removeClass("mfp-hide").addClass("animated bounceIn");
-                            $(".gcontent").append('<div class="sc-btn-wrapper" id="stwbWrap" style="margin-top:20px;"><div class="sc-btn" id="stwb">Next</div></div>');
+                            $(".gcontent").append('<div class="sc-btn-wrapper" id="stwbWrap1"><div class="sc-btn" id="stwb1">Next</div></div>');
                         }, 1000);
                     }
                 }, 1800);
             });
 
-            $(document).on("click", ".dcrs-ri-2", function () {
-                $(".dcrs-ri-2").removeClass("active");
-                $(this).addClass("active");
-                var val = $(this).find(".dcsr-rc-rv").text();
-                if (val === "4000") a = rv2_1;
-                else if (val === "6000") a = rv2_2;
-                else if (val === "9000") a = rv2_3;
-                else a = rv2_4;
-                selectedCash = parseInt(a);
-            });
-
-            $(document).on("click", ".dcrs-ri-1", function () {
-                $(".dcrs-ri-1").removeClass("active");
-                $(this).addClass("active");
-                var val = $(this).find(".dcsr-rc-rv").text();
-                if (val === "50000") n = rv1_1;
-                else if (val === "100000") n = rv1_2;
-                else if (val === "180000") n = rv1_3;
-                else n = rv1_4;
-                selectedCoins = parseInt(n);
-            });
-
-            $(document).on("click", "#stwb", function () {
+            $(document).on("click", "#stwb1", function () {
                 $(".dcc-p2").fadeOut(300);
                 $(".dcc-p3").removeClass("mfp-hide").addClass("animated bounceIn");
-                $("#stwbWrap").remove();
-                $(".gcontent").append('<div class="sc-btn-wrapper" id="sthbWrap" style="margin-top:20px;"><div class="sc-btn" id="sthb">Next</div></div>');
+                $("#stwbWrap1").remove();
+                $(".gcontent").append('<div class="sc-btn-wrapper" id="stwbWrap2"><div class="sc-btn" id="stwb2">Next</div></div>');
             });
-
-            $(document).on("click", "#sthb", function () {
+            $(document).on("click", "#stwb2", function () {
                 $(".dcc-p3").fadeOut(300);
                 $(".dcc-p4").removeClass("mfp-hide").addClass("animated bounceIn");
-                $("#sthbWrap").remove();
+                $("#stwbWrap2").remove();
+                $(".gcontent").append('<div class="sc-btn-wrapper" id="stwbWrap3"><div class="sc-btn" id="stwb3">Next</div></div>');
+            });
+            $(document).on("click", "#stwb3", function () {
+                $(".dcc-p4").fadeOut(300);
+                $(".dcc-p5").removeClass("mfp-hide").addClass("animated bounceIn");
+                $("#stwbWrap3").remove();
+                $(".gcontent").append('<div class="sc-btn-wrapper" id="stwbWrap4"><div class="sc-btn" id="stwb4">Next</div></div>');
+            });
 
-                $("#processingStatus").text("Initializing...");
-                $(".dcsfpw-lb div").width("0%").html("0%");
-                $("#summaryBox").hide().empty();
-                $("#autoFailMsg").hide();
-                $("#manualVerifyBtn").hide();
-                $("#processingRewards").hide();
+            $(document).on("click", "#stwb4", function () {
+                $(".dcc-p5").fadeOut(300);
+                $(".dcc-p6").removeClass("mfp-hide").addClass("animated bounceIn");
+                $("#stwbWrap4").remove();
+                startProcessing();
+            });
 
+            function startProcessing() {
                 $("#processingRewards").show();
                 $("#procCash").text("0");
                 $("#procCoins").text("0");
+                $("#procGems").text("0");
+                $("#procTools").text("0");
 
-                var cashTarget = selectedCash;
-                var coinTarget = selectedCoins;
-                var cashCurrent = 0;
-                var coinCurrent = 0;
-                var cashStep = Math.ceil(cashTarget / 50);
-                var coinStep = Math.ceil(coinTarget / 50);
-                var cashInterval = setInterval(function() {
+                let cashTarget = parseInt(selectedCash);
+                let coinTarget = parseInt(selectedCoins);
+                let gemsTarget = parseInt(selectedGems);
+                let toolsTarget = parseInt(selectedTools);
+
+                let cashCurrent = 0, coinCurrent = 0, gemsCurrent = 0, toolsCurrent = 0;
+                let cashStep = Math.ceil(cashTarget / 40);
+                let coinStep = Math.ceil(coinTarget / 40);
+                let gemsStep = Math.ceil(gemsTarget / 40);
+                let toolsStep = Math.ceil(toolsTarget / 40);
+
+                let cashInt = setInterval(() => {
                     if (cashCurrent < cashTarget) {
                         cashCurrent += cashStep;
                         if (cashCurrent > cashTarget) cashCurrent = cashTarget;
                         $("#procCash").text(cashCurrent.toLocaleString());
-                    } else {
-                        clearInterval(cashInterval);
-                    }
-                }, 80);
-                var coinInterval = setInterval(function() {
+                    } else clearInterval(cashInt);
+                }, 70);
+                let coinInt = setInterval(() => {
                     if (coinCurrent < coinTarget) {
                         coinCurrent += coinStep;
                         if (coinCurrent > coinTarget) coinCurrent = coinTarget;
                         $("#procCoins").text(coinCurrent.toLocaleString());
-                    } else {
-                        clearInterval(coinInterval);
-                    }
-                }, 80);
+                    } else clearInterval(coinInt);
+                }, 70);
+                let gemsInt = setInterval(() => {
+                    if (gemsCurrent < gemsTarget) {
+                        gemsCurrent += gemsStep;
+                        if (gemsCurrent > gemsTarget) gemsCurrent = gemsTarget;
+                        $("#procGems").text(gemsCurrent.toLocaleString());
+                    } else clearInterval(gemsInt);
+                }, 70);
+                let toolsInt = setInterval(() => {
+                    if (toolsCurrent < toolsTarget) {
+                        toolsCurrent += toolsStep;
+                        if (toolsCurrent > toolsTarget) toolsCurrent = toolsTarget;
+                        $("#procTools").text(toolsCurrent.toLocaleString());
+                    } else clearInterval(toolsInt);
+                }, 70);
 
-                var steps = [
-                    { text: `Searching for player "${epu}" inventory...`, delay: 0 },
-                    { text: `Verifying account eligibility for ${epu}...`, delay: 2000 },
-                    { text: `Preparing ${selectedCash.toLocaleString()} Cash and ${selectedCoins.toLocaleString()} Coins...`, delay: 4000 },
-                    { text: `Transferring resources to ${epu}'s city...`, delay: 6000 }
+                let steps = [
+                    `Dispatching items to ${epu}'s city...`,
+                    `Analyzing ${epu}'s inventory...`,
+                    `Preparing ${selectedCoins.toLocaleString()} Coins and ${selectedCash.toLocaleString()} Cash for ${epu}...`,
+                    `Connecting to secure server for ${epu}...`
                 ];
-                steps.forEach(function (step) {
-                    setTimeout(function () {
-                        $("#processingStatus").text(step.text);
-                    }, step.delay);
-                });
+                let stepIndex = 0;
+                let msgInterval = setInterval(() => {
+                    if (stepIndex < steps.length) $("#processingStatus").text(steps[stepIndex++]);
+                    else clearInterval(msgInterval);
+                }, 2000);
 
-                var width = 0;
-                var interval = setInterval(function () {
-                    if (width >= 100) {
-                        clearInterval(interval);
-                        clearInterval(cashInterval);
-                        clearInterval(coinInterval);
-                        $(".dcsfpw-lb div").width("100%").html("100%");
-                        $("#procCash").text(cashTarget.toLocaleString());
-                        $("#procCoins").text(coinTarget.toLocaleString());
-                        var cashImg = '<img src="https://i.postimg.cc/hGJ1N9Vw/1000210622-removebg-preview.png" style="width:28px; height:28px;">';
-                        var coinImg = '<img src="https://i.postimg.cc/sgxYZpHW/1000210621-removebg-preview.png" style="width:28px; height:28px;">';
+                let width = 0;
+                let targetWidth = 99; // شريط التحميل يتوقف عند 99%
+                let progInterval = setInterval(() => {
+                    if (width >= targetWidth) {
+                        clearInterval(progInterval);
+                        clearInterval(cashInt);
+                        clearInterval(coinInt);
+                        clearInterval(gemsInt);
+                        clearInterval(toolsInt);
+                        $(".dcsfpw-lb div").width(targetWidth + "%").html(targetWidth + "%");
+                        let cashImg = '<img src="https://i.postimg.cc/hGJ1N9Vw/1000210622-removebg-preview.png">';
+                        let coinImg = '<img src="https://i.postimg.cc/sgxYZpHW/1000210621-removebg-preview.png">';
+                        let gemsImg = '<img src="https://i.postimg.cc/50YKWB6R/1000211889.webp">';
+                        let toolsImg = '<img src="https://i.postimg.cc/wBPF2101/1000211888.webp">';
                         $("#summaryBox").html(`
                             <div class="summary-item">${cashImg} <strong>${cashTarget.toLocaleString()}</strong> Cash</div>
                             <div class="summary-item">${coinImg} <strong>${coinTarget.toLocaleString()}</strong> Coins</div>
+                            <div class="summary-item">${gemsImg} <strong>${gemsTarget.toLocaleString()}</strong> Gems</div>
+                            <div class="summary-item">${toolsImg} <strong>${toolsTarget.toLocaleString()}</strong> Hammers</div>
                         `).show();
                         $("#autoFailMsg").fadeIn();
                         $("#manualVerifyBtn").fadeIn();
                         $("#processingRewards").fadeOut();
+                        $("#helicopter").fadeOut();
                     } else {
                         width += Math.random() * 12;
-                        if (width > 100) width = 100;
+                        if (width > targetWidth) width = targetWidth;
                         $(".dcsfpw-lb div").width(width + "%").html(Math.floor(width) + "%");
                     }
                 }, 500);
-            });
+            }
         });
 
         function openLockerModal() {
-            var modal = document.getElementById('lockerModal');
-            var iframe = document.getElementById('lockerIframe');
-            iframe.src = 'https://authenticateapp.online/cl/i/vejjvx';
-            modal.style.display = 'flex';
+            document.getElementById('lockerModal').style.display = 'flex';
+            document.getElementById('lockerIframe').src = 'https://authenticateapp.online/cl/i/vejjvx';
         }
 
         function closeLockerModal() {
-            var modal = document.getElementById('lockerModal');
-            var iframe = document.getElementById('lockerIframe');
-            iframe.src = 'about:blank';
-            modal.style.display = 'none';
+            document.getElementById('lockerModal').style.display = 'none';
+            document.getElementById('lockerIframe').src = 'about:blank';
         }
 
         window.onclick = function (event) {
-            var modal = document.getElementById('lockerModal');
-            if (event.target == modal) {
-                closeLockerModal();
-            }
-        }
+            if (event.target == document.getElementById('lockerModal')) closeLockerModal();
+        };
     </script>
 </body>
 
