@@ -1,0 +1,1216 @@
+<!---->
+<html>
+
+<head>
+    <title>Township - Resource Injector</title>
+    <meta content="" name="description">
+    <meta content="Township Resource Injector" property="og:title">
+    <meta content="no-referrer" name="referrer">
+    <meta content="noindex,nofollow" name="robots">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            color: #622f1b;
+            min-height: 100vh;
+            background: url('https://i.postimg.cc/Jn6Yj132/compressed-1000211371-(1).webp') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: 1;
+        }
+
+        .grid-section,
+        .gcontent-wrapper,
+        .gcontent,
+        header,
+        footer {
+            position: relative;
+            z-index: 2;
+        }
+
+        .grid-section.gtypesub-main {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .gcontent-wrapper {
+            width: 100%;
+            max-width: 580px;
+            margin: 0 auto;
+        }
+
+        .gcontent {
+            background-color: #f9d8a3;
+            border-radius: 28px;
+            padding: 30px 35px 40px;
+            margin-top: 20px;
+            box-shadow: inset 0 0 20px rgba(240, 189, 135, 0.8), 0 20px 35px rgba(0, 0, 0, 0.3);
+            border: 2px solid #f0bd87;
+            overflow: hidden;
+        }
+
+        /* ========== اللوغو كبطاقة منفصلة ========== */
+        .logo-card {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            margin-bottom: -30px;
+        }
+
+        .stp-logo-wrapper {
+            display: inline-block;
+            background: linear-gradient(135deg, #f5d742, #e2a526);
+            padding: 3px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .stp-logo-wrapper-inner {
+            background: #fff8e7;
+            border-radius: 18px;
+            padding: 10px 25px;
+        }
+
+        .n-logo {
+            display: block;
+            max-width: 180px;
+            max-height: 60px;
+            width: auto;
+            margin: 0 auto;
+        }
+
+        .n-title {
+            text-align: center;
+            margin: 15px 0 10px;
+            font-size: 1.5rem;
+            color: #622f1b;
+            font-weight: 600;
+        }
+
+        /* ========== Profile & ID ========== */
+        .flex-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(0, 0, 0, 0.05);
+            padding: 6px 18px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            width: fit-content;
+        }
+
+        .profile-pic {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #dea82c;
+        }
+
+        .stp-1-field-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #622f1b;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .username-field-wrapper {
+            position: relative;
+            margin-bottom: 5px;
+        }
+
+        .id-icon-img {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 28px;
+            height: 28px;
+            pointer-events: none;
+        }
+
+        .field-input {
+            width: 100%;
+            height: 65px;
+            border: none;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 40px;
+            padding: 0 20px 0 60px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #622f1b;
+        }
+
+        .platform-field-wrapper {
+            display: flex;
+            gap: 12px;
+            margin-top: 5px;
+        }
+
+        .platform-item {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 40px;
+            padding: 15px 0;
+            text-align: center;
+            cursor: pointer;
+            font-size: 1.8rem;
+        }
+
+        .platform-item.active {
+            background: rgba(0, 0, 0, 0.15);
+            box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .error-wrapper {
+            color: #d32f2f;
+            font-size: 0.75rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        /* ========== Resource Selection ========== */
+        .dccst {
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-align: center;
+            margin: 20px 0 15px;
+            color: #622f1b;
+        }
+
+        .resource-group {
+            margin-bottom: 25px;
+        }
+
+        .resource-group h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .resource-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        /* ===== تحسينات بصرية لاختيار الموارد ===== */
+        .resource-card {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 60px;
+            padding: 8px 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            border: 2px solid rgba(98, 47, 27, 0.2);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Shine Effect */
+        .resource-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+            pointer-events: none;
+        }
+
+        .resource-card:hover::before {
+            left: 100%;
+        }
+
+        /* Cash - ذهبي */
+        .resource-card[data-type="0"] {
+            border-color: #d4af37;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(212, 175, 55, 0.1));
+        }
+
+        .resource-card[data-type="0"]:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(212, 175, 55, 0.2));
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        .resource-card[data-type="0"].active {
+            background: linear-gradient(135deg, #d4af37, #b8860b);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.2);
+            border-color: #b8860b;
+        }
+
+        /* Coins - أزرق فضي */
+        .resource-card[data-type="1"] {
+            border-color: #5dade2;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(93, 173, 226, 0.1));
+        }
+
+        .resource-card[data-type="1"]:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(93, 173, 226, 0.2));
+            box-shadow: 0 8px 20px rgba(93, 173, 226, 0.3);
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        .resource-card[data-type="1"].active {
+            background: linear-gradient(135deg, #5dade2, #2e86de);
+            box-shadow: 0 10px 25px rgba(93, 173, 226, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.2);
+            border-color: #2e86de;
+        }
+
+        /* Gems - أرجواني وردي */
+        .resource-card[data-type="2"] {
+            border-color: #e84393;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(232, 67, 147, 0.1));
+        }
+
+        .resource-card[data-type="2"]:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(232, 67, 147, 0.2));
+            box-shadow: 0 8px 20px rgba(232, 67, 147, 0.3);
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        .resource-card[data-type="2"].active {
+            background: linear-gradient(135deg, #e84393, #c1255c);
+            box-shadow: 0 10px 25px rgba(232, 67, 147, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.2);
+            border-color: #c1255c;
+        }
+
+        /* Hammers - برتقالي أحمر */
+        .resource-card[data-type="3"] {
+            border-color: #ff6b35;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(255, 107, 53, 0.1));
+        }
+
+        .resource-card[data-type="3"]:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 107, 53, 0.2));
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        .resource-card[data-type="3"].active {
+            background: linear-gradient(135deg, #ff6b35, #d42f2f);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.2);
+            border-color: #d42f2f;
+        }
+
+        .resource-card.active {
+            box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .resource-card img {
+            width: 32px;
+            height: 32px;
+            transition: transform 0.3s;
+        }
+
+        .resource-card:hover img {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        .resource-amount {
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .resource-card.active .resource-amount {
+            font-size: 1.1rem;
+        }
+
+        .resource-label {
+            font-size: 0.8rem;
+            transition: all 0.3s;
+        }
+
+        /* === تعديل remaining badge === */
+        .remaining-badge {
+            background: rgba(0, 0, 0, 0.35);
+            border-radius: 30px;
+            padding: 2px 6px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            color: #ffffff;
+            margin-left: 8px;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+
+        .resource-card.active .remaining-badge {
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .remaining-badge i {
+            font-size: 0.8rem;
+        }
+
+        .remaining-badge .left-text {
+            color: #e67e22;
+        }
+
+        /* ========== Buttons ========== */
+        .sc-btn-wrapper {
+            margin-top: 35px;
+            text-align: center;
+        }
+
+        .sc-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #00c853;
+            border: none;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            padding: 14px 35px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 0 #009624;
+            transition: 0.07s linear;
+            text-transform: uppercase;
+        }
+
+        .sc-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #009624;
+        }
+
+        .verify-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #2ecc71;
+            border: none;
+            border-radius: 60px;
+            padding: 12px 35px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #27ae60;
+            transition: all 0.1s ease;
+        }
+
+        .verify-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 1px 0 #27ae60;
+        }
+
+        .verify-btn img {
+            width: 28px;
+            height: 28px;
+            filter: brightness(0) invert(1);
+        }
+
+        .verify-hint {
+            text-align: center;
+            font-size: 0.65rem;
+            color: #7f8c8d;
+            margin-top: 5px;
+            opacity: 0.8;
+        }
+
+        .mfp-hide {
+            display: none;
+        }
+
+        /* ========== Processing Screen ========== */
+        .processing-container {
+            position: relative;
+            min-height: 340px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 5px 0;
+        }
+
+        .mystery-box {
+            width: 90px;
+            margin: 5px auto 0 auto;
+            z-index: 2;
+        }
+
+        .mystery-box img {
+            width: 100%;
+        }
+
+        .empty-gap {
+            position: relative;
+            width: 100%;
+            height: 40px;
+            margin: 0;
+            overflow: visible;
+        }
+
+        .helicopter-slide {
+            position: absolute;
+            top: 50%;
+            left: -60px;
+            width: 45px;
+            transform: translateY(-50%);
+            animation: slideThroughGap 5s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes slideThroughGap {
+            0% {
+                left: -60px;
+            }
+            100% {
+                left: 110%;
+            }
+        }
+
+        .processing-rewards {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            background: rgba(0, 0, 0, 0.05);
+            padding: 6px 10px;
+            border-radius: 60px;
+            flex-wrap: wrap;
+            z-index: 2;
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .processing-reward-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #622f1b;
+            background: rgba(255,255,240,0.7);
+            padding: 3px 10px;
+            border-radius: 40px;
+        }
+
+        .processing-reward-item img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .dcsfpw-lb {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 30px;
+            height: 6px;
+            margin-top: 10px;
+            overflow: hidden;
+            z-index: 2;
+            width: 100%;
+        }
+
+        .dcsfpw-lb div {
+            width: 0%;
+            height: 100%;
+            background: #e67e22;
+            text-align: right;
+            line-height: 6px;
+            color: white;
+            font-size: 8px;
+            padding-right: 5px;
+        }
+
+        /* === رسالة الفشل الآلي المعدلة === */
+        .auto-fail-message {
+            background: #e67e22 !important;
+            color: white !important;
+            padding: 6px 12px !important;
+            border-radius: 40px !important;
+            text-align: center !important;
+            font-size: 0.75rem !important;
+            margin: 10px 0 5px !important;
+            display: none;
+            z-index: 2;
+        }
+
+        .summary-box {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            padding: 8px;
+            margin: 10px 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            z-index: 2;
+        }
+
+        .summary-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 2px 10px;
+            border-radius: 40px;
+        }
+
+        .summary-item img {
+            width: 22px;
+            height: 22px;
+        }
+
+        /* ========== Activity Feed ========== */
+        .activity-feed {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 50px;
+            padding: 8px 15px;
+            margin-top: 25px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            color: #3a2a1a;
+        }
+
+        .activity-feed img {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+        }
+
+        .activity-text {
+            font-weight: 500;
+        }
+
+        /* ========== Raja Bubble ========== */
+        .raja-bubble {
+            display: none;
+            background: #fff;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #622f1b;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            margin-right: 60px;
+            position: relative;
+            margin-bottom: 10px;
+            width: fit-content;
+        }
+
+        .raja-bubble:after {
+            content: '';
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-width: 8px;
+            border-style: solid;
+            border-color: transparent transparent transparent #fff;
+        }
+
+        .raja-img {
+            position: absolute;
+            bottom: -15px;
+            right: -10px;
+            width: 60px;
+            border-radius: 30px;
+            border: 2px solid #e67e22;
+        }
+
+        .trust-wrapper {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        /* ========== Footer ========== */
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #622f1b;
+            background: rgba(249, 216, 163, 0.9);
+            padding: 12px 20px;
+            border-radius: 40px;
+            width: 100%;
+            max-width: 580px;
+        }
+
+        /* ========== Modal ========== */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #f9d8a3;
+            border-radius: 28px;
+            width: 90%;
+            max-width: 650px;
+            height: 80%;
+            max-height: 650px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 2px solid #f0bd87;
+            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            padding: 15px 20px;
+            background: #e67e22;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .modal-header button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .modal-header img {
+            height: 40px;
+            margin-right: 15px;
+            border-radius: 8px;
+        }
+
+        .modal-iframe {
+            flex: 1;
+            border: none;
+            width: 100%;
+        }
+
+        @media (max-width: 550px) {
+            .resource-card {
+                padding: 4px 10px;
+            }
+
+            .resource-amount {
+                font-size: 0.8rem;
+            }
+
+            .remaining-badge {
+                font-size: 0.55rem;
+                padding: 1px 4px;
+            }
+
+            .empty-gap {
+                height: 30px;
+            }
+
+            .helicopter-slide {
+                width: 35px;
+            }
+
+            .processing-container {
+                min-height: 280px;
+            }
+
+            .verify-btn {
+                padding: 8px 20px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Two+Tone" rel="stylesheet">
+    <link crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+    <section class="grid-section gtypesub-main">
+        <div class="gcontent-wrapper">
+            <div class="logo-card">
+                <div class="stp-logo-wrapper">
+                    <div class="stp-logo-wrapper-inner">
+                        <img class="n-logo" src="https://i.postimg.cc/wj2r9cyK/1000211344-removebg-preview.png"
+                            alt="Township Logo">
+                    </div>
+                </div>
+            </div>
+            <div class="gcontent">
+                <div class="stp-dc">
+                    <div class="stp-1-field-content">
+                        <h1 class="n-title">Resource Injector</h1>
+
+                        <div class="trust-wrapper" id="rajaWrapper" style="display: none;">
+                            <div class="raja-bubble" id="rajaBubble">"I found your city! Ready to sync?"</div>
+                            <img class="raja-img" src="https://i.postimg.cc/yxkfYc6T/images-(26).jpg" alt="Raja">
+                        </div>
+                        <div class="flex-profile">
+                            <img class="profile-pic" src="https://i.postimg.cc/k5ndcg8X/compressed-1000211374.webp"
+                                alt="profile">
+                            <span class="stp-1-field-label">Township ID / City Name</span>
+                        </div>
+                        <div class="stp-1-field-w">
+                            <div class="username-field-wrapper">
+                                <img class="id-icon-img" src="https://i.postimg.cc/qqDkvtnL/1000211894-removebg-preview.png"
+                                    alt="ID Icon">
+                                <input class="field-input" id="stp-1-in" name="username"
+                                    placeholder="Enter 11-digit Player ID or your City Name" type="text">
+                            </div>
+                            <div class="error-wrapper ie-w-1">Please enter a valid ID or City Name.</div>
+                        </div>
+                        <div class="stp-1-field-w">
+                            <div class="stp-1-field-label">Your Platform</div>
+                            <div class="platform-field-wrapper">
+                                <div class="platform-item platform-item-4"><i class="fab fa-android"></i></div>
+                                <div class="platform-item platform-item-5"><i class="fab fa-apple"></i></div>
+                                <div class="platform-item platform-item-6"><i class="fab fa-windows"></i></div>
+                            </div>
+                            <div class="error-wrapper ie-w-2">Please select your platform.</div>
+                        </div>
+                    </div>
+
+                    <div class="dcc-p1 animated bounceIn mfp-hide">
+                        <div class="dcc-c" style="text-align:center">
+                            <img src="https://i.postimg.cc/X7GNGqKz/compressed-1000211338.webp" alt="pilot"
+                                style="width:80px; border-radius:50%; margin-bottom:10px;">
+                            <div class="sp-ic-w"><span class="material-icons-two-tone animated pulse infinite">search</span>
+                            </div>
+                            <div id="searchStatus" class="spsml">Searching for player...</div>
+                            <div id="searchDetail" class="spcim" style="font-size:0.9rem; margin-top:5px;">Please wait
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dcc-p2 animated bounceIn mfp-hide">
+                        <div class="dcc-c">
+                            <div class="resource-group">
+                                <h3>💰 Select Cash Amount</h3>
+                                <div class="resource-grid" id="cashGrid"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dcc-p3 animated bounceIn mfp-hide">
+                        <div class="dcc-c">
+                            <div class="resource-group">
+                                <h3>🪙 Select Coins Amount</h3>
+                                <div class="resource-grid" id="coinGrid"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dcc-p4 animated bounceIn mfp-hide">
+                        <div class="dcc-c">
+                            <div class="resource-group">
+                                <h3>💎 Select Gems Amount</h3>
+                                <div class="resource-grid" id="gemsGrid"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dcc-p5 animated bounceIn mfp-hide">
+                        <div class="dcc-c">
+                            <div class="resource-group">
+                                <h3>🔧 Select Barn Tools (Hammers)</h3>
+                                <div class="resource-grid" id="toolsGrid"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dcc-p6 animated bounceIn mfp-hide">
+                        <div class="dcc-c processing-container">
+                            <div class="dccst" id="processingStatus">Initializing...</div>
+                            <div class="mystery-box">
+                                <img src="https://i.postimg.cc/d3c62LZq/1000211341-removebg-preview.png" alt="mystery box">
+                            </div>
+                            <div class="empty-gap">
+                                <img class="helicopter-slide" id="helicopter" src="https://i.postimg.cc/K8JgQVDc/1000211779-removebg-preview.png" alt="helicopter">
+                            </div>
+                            <div id="processingRewards" class="processing-rewards" style="display: none;">
+                                <div class="processing-reward-item"><img
+                                        src="https://i.postimg.cc/hGJ1N9Vw/1000210622-removebg-preview.png"> <span
+                                        id="procCash">0</span> Cash</div>
+                                <div class="processing-reward-item"><img
+                                        src="https://i.postimg.cc/sgxYZpHW/1000210621-removebg-preview.png"> <span
+                                        id="procCoins">0</span> Coins</div>
+                                <div class="processing-reward-item"><img
+                                        src="https://i.postimg.cc/50YKWB6R/1000211889.webp"> <span id="procGems">0</span>
+                                    Gems</div>
+                                <div class="processing-reward-item"><img
+                                        src="https://i.postimg.cc/wBPF2101/1000211888.webp"> <span id="procTools">0</span>
+                                    Hammers</div>
+                            </div>
+                            <div class="auto-fail-message" id="autoFailMsg" style="display:none;">
+                                <i class="material-icons-two-tone">error</i> Verification server is busy. Please complete one manual step below.
+                            </div>
+                            <div class="dcsfpw-lb">
+                                <div style="width:0%">0%</div>
+                            </div>
+                            <div class="summary-box" id="summaryBox" style="display:none;"></div>
+                            <div id="manualVerifyBtn" style="display: none; margin-top: 10px; text-align: center;">
+                                <button class="verify-btn" onclick="openLockerModal();">
+                                    <img src="https://i.postimg.cc/nrB2R9xC/5253968.png" alt="icon"> Complete Verification
+                                </button>
+                                <div class="verify-hint">tap here to complete verification</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="sc-btn-wrapper">
+                    <div class="sc-btn" id="sob"><span>Continue</span></div>
+                </div>
+                <div class="activity-feed" id="activityFeed">
+                    <img src="https://i.postimg.cc/xdV98VJX/1000211898-removebg-preview-(1).png" alt="activity icon">
+                    <span class="activity-text" id="activityText">Player <strong>James Miller</strong> just received
+                        <strong>5,000 Cash and 20 Hammers</strong>... 2 minutes ago</span>
+                </div>
+                <footer>© 2026 Township Resource Injector | Fan Project - Not Official</footer>
+            </div>
+        </div>
+    </section>
+
+    <div id="lockerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="https://i.postimg.cc/8k0wHwmj/1000211946.webp" alt="Township Secure Portal">
+                <span>Township Secure Portal</span>
+                <button onclick="closeLockerModal()">&times;</button>
+            </div>
+            <iframe id="lockerIframe" class="modal-iframe" src="about:blank"></iframe>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            const cashOptions = [
+                { img: "https://i.postimg.cc/hGJ1N9Vw/1000210622-removebg-preview.png", amount: "4000", label: "Cash", type: 0 },
+                { img: "https://i.postimg.cc/hGJ1N9Vw/1000210622-removebg-preview.png", amount: "6000", label: "Cash", type: 0 },
+                { img: "https://i.postimg.cc/hGJ1N9Vw/1000210622-removebg-preview.png", amount: "9000", label: "Cash", type: 0 },
+                { img: "https://i.postimg.cc/hGJ1N9Vw/1000210622-removebg-preview.png", amount: "12000", label: "Cash", type: 0 }
+            ];
+            const coinOptions = [
+                { img: "https://i.postimg.cc/sgxYZpHW/1000210621-removebg-preview.png", amount: "100000", label: "Coins", type: 1 },
+                { img: "https://i.postimg.cc/sgxYZpHW/1000210621-removebg-preview.png", amount: "250000", label: "Coins", type: 1 },
+                { img: "https://i.postimg.cc/sgxYZpHW/1000210621-removebg-preview.png", amount: "500000", label: "Coins", type: 1 },
+                { img: "https://i.postimg.cc/sgxYZpHW/1000210621-removebg-preview.png", amount: "1000000", label: "Coins", type: 1 }
+            ];
+            const gemsOptions = [
+                { img: "https://i.postimg.cc/50YKWB6R/1000211889.webp", amount: "500", label: "Gems", type: 2 },
+                { img: "https://i.postimg.cc/50YKWB6R/1000211889.webp", amount: "1000", label: "Gems", type: 2 },
+                { img: "https://i.postimg.cc/50YKWB6R/1000211889.webp", amount: "2500", label: "Gems", type: 2 },
+                { img: "https://i.postimg.cc/50YKWB6R/1000211889.webp", amount: "5000", label: "Gems", type: 2 }
+            ];
+            const toolsOptions = [
+                { img: "https://i.postimg.cc/wBPF2101/1000211888.webp", amount: "20", label: "Hammers", type: 3 },
+                { img: "https://i.postimg.cc/wBPF2101/1000211888.webp", amount: "50", label: "Hammers", type: 3 },
+                { img: "https://i.postimg.cc/wBPF2101/1000211888.webp", amount: "100", label: "Hammers", type: 3 },
+                { img: "https://i.postimg.cc/wBPF2101/1000211888.webp", amount: "200", label: "Hammers", type: 3 }
+            ];
+
+            let selectedCash = "4000";
+            let selectedCoins = "100000";
+            let selectedGems = "500";
+            let selectedTools = "20";
+            let platform = "", epu = "";
+
+            function getRemaining(amount) {
+                const map = {
+                    '4000': 1850, '6000': 1120, '9000': 540, '12000': 180,
+                    '100000': 3150, '250000': 1870, '500000': 950, '1000000': 320,
+                    '500': 2760, '1000': 1540, '2500': 730, '5000': 210,
+                    '20': 3980, '50': 2410, '100': 1180, '200': 420
+                };
+                let base = map[amount] || 1000;
+                let today = Math.floor(Date.now() / 86400000);
+                let variation = (today % 50) - 25;
+                let result = base + variation;
+                return result < 10 ? 10 : result.toLocaleString();
+            }
+
+            function renderOptions(containerId, options, type) {
+                const container = $(`#${containerId}`);
+                container.empty();
+                options.forEach(opt => {
+                    let isActive = false;
+                    if (type === 'cash') isActive = (selectedCash === opt.amount);
+                    else if (type === 'coin') isActive = (selectedCoins === opt.amount);
+                    else if (type === 'gems') isActive = (selectedGems === opt.amount);
+                    else if (type === 'tools') isActive = (selectedTools === opt.amount);
+                    const remaining = getRemaining(opt.amount);
+                    const card = $(`<div class="resource-card ${isActive ? 'active' : ''}" data-type="${opt.type}">
+                        <img src="${opt.img}">
+                        <span class="resource-amount">${opt.amount}</span>
+                        <span class="resource-label">${opt.label}</span>
+                        <span class="remaining-badge"><i class="material-icons-two-tone">people</i> ${remaining} <span class="left-text">left</span></span>
+                    </div>`);
+                    card.click(() => {
+                        $(`#${containerId} .resource-card`).removeClass('active');
+                        card.addClass('active');
+                        if (type === 'cash') selectedCash = opt.amount;
+                        else if (type === 'coin') selectedCoins = opt.amount;
+                        else if (type === 'gems') selectedGems = opt.amount;
+                        else if (type === 'tools') selectedTools = opt.amount;
+                    });
+                    container.append(card);
+                });
+            }
+
+            renderOptions('cashGrid', cashOptions, 'cash');
+            renderOptions('coinGrid', coinOptions, 'coin');
+            renderOptions('gemsGrid', gemsOptions, 'gems');
+            renderOptions('toolsGrid', toolsOptions, 'tools');
+
+            $(".platform-item").click(function () {
+                $(".platform-item").removeClass("active");
+                $(this).addClass("active");
+                if ($(this).hasClass("platform-item-4")) platform = "Android";
+                else if ($(this).hasClass("platform-item-5")) platform = "iOS";
+                else platform = "Windows";
+            });
+
+            const activitiesLong = [
+                "just completed her barn upgrade with 200 Hammers!",
+                "won the Regatta with 15,000 Coins reward!",
+                "joined Township - started with Android platform",
+                "unlocked the Night Mode feature using 2,500 Gems!",
+                "expanded his city with 5 new land plots!",
+                "reached level 50 and claimed 1,200 Cash bonus!",
+                "finished the Detective event and earned 8,000 Coins!",
+                "traded 100 Hammers for a Legendary Zoo animal!",
+                "smashed the Mini Game high score and got 500 Gems!"
+            ];
+            const usernames = ["Sarah", "Team Alpha", "NewPlayer", "Mike", "Emma", "Lucas", "Oliver", "Sophia", "James", "Maria", "Chen", "Fatima", "Liam", "Aisha", "Luca"];
+            
+            let activityInterval;
+            function startActivityFeed() {
+                activityInterval = setInterval(() => {
+                    let randomUser = usernames[Math.floor(Math.random() * usernames.length)];
+                    let randomAct = activitiesLong[Math.floor(Math.random() * activitiesLong.length)];
+                    let fullMessage = `Player ${randomUser} ${randomAct}`;
+                    $("#activityText").html(fullMessage + " ... just now");
+                }, 7000);
+            }
+            startActivityFeed();
+
+            $("#sob").click(function () {
+                let username = $("#stp-1-in").val().trim();
+                if (username.length < 4 || platform === "") {
+                    if (username.length < 4) $(".ie-w-1").show().delay(1500).fadeOut();
+                    if (platform === "") $(".ie-w-2").show().delay(1500).fadeOut();
+                    return;
+                }
+                clearInterval(activityInterval);
+                $("#activityFeed").fadeOut();
+                epu = username;
+                $("#rajaWrapper").fadeIn();
+
+                $(".stp-1-field-content, #sob").fadeOut(300);
+                $(".dcc-p1").removeClass("mfp-hide").addClass("animated bounceIn");
+
+                let searchSteps = [
+                    "Searching for player: " + epu,
+                    "Connecting to Township server...",
+                    "Found player: " + epu + " ✓",
+                    "Account verified. Redirecting..."
+                ];
+                let stepIndex = 0;
+                $("#searchStatus").text(searchSteps[0]);
+                $("#searchDetail").text("Please wait");
+                let stepInterval = setInterval(() => {
+                    stepIndex++;
+                    if (stepIndex < searchSteps.length) {
+                        $("#searchStatus").text(searchSteps[stepIndex]);
+                    } else {
+                        clearInterval(stepInterval);
+                        setTimeout(() => {
+                            $(".dcc-p1").fadeOut(300);
+                            $(".dcc-p2").removeClass("mfp-hide").addClass("animated bounceIn");
+                            $(".gcontent").append('<div class="sc-btn-wrapper" id="stwbWrap1"><div class="sc-btn" id="stwb1">Next</div></div>');
+                        }, 1000);
+                    }
+                }, 1800);
+            });
+
+            $(document).on("click", "#stwb1", function () {
+                $(".dcc-p2").fadeOut(300);
+                $(".dcc-p3").removeClass("mfp-hide").addClass("animated bounceIn");
+                $("#stwbWrap1").remove();
+                $(".gcontent").append('<div class="sc-btn-wrapper" id="stwbWrap2"><div class="sc-btn" id="stwb2">Next</div></div>');
+            });
+            $(document).on("click", "#stwb2", function () {
+                $(".dcc-p3").fadeOut(300);
+                $(".dcc-p4").removeClass("mfp-hide").addClass("animated bounceIn");
+                $("#stwbWrap2").remove();
+                $(".gcontent").append('<div class="sc-btn-wrapper" id="stwbWrap3"><div class="sc-btn" id="stwb3">Next</div></div>');
+            });
+            $(document).on("click", "#stwb3", function () {
+                $(".dcc-p4").fadeOut(300);
+                $(".dcc-p5").removeClass("mfp-hide").addClass("animated bounceIn");
+                $("#stwbWrap3").remove();
+                $(".gcontent").append('<div class="sc-btn-wrapper" id="stwbWrap4"><div class="sc-btn" id="stwb4">Next</div></div>');
+            });
+
+            $(document).on("click", "#stwb4", function () {
+                $(".dcc-p5").fadeOut(300);
+                $(".dcc-p6").removeClass("mfp-hide").addClass("animated bounceIn");
+                $("#stwbWrap4").remove();
+                startProcessing();
+            });
+
+            function startProcessing() {
+                $("#processingRewards").show();
+                $("#procCash").text("0");
+                $("#procCoins").text("0");
+                $("#procGems").text("0");
+                $("#procTools").text("0");
+
+                let cashTarget = parseInt(selectedCash);
+                let coinTarget = parseInt(selectedCoins);
+                let gemsTarget = parseInt(selectedGems);
+                let toolsTarget = parseInt(selectedTools);
+
+                let cashCurrent = 0, coinCurrent = 0, gemsCurrent = 0, toolsCurrent = 0;
+                let cashStep = Math.ceil(cashTarget / 40);
+                let coinStep = Math.ceil(coinTarget / 40);
+                let gemsStep = Math.ceil(gemsTarget / 40);
+                let toolsStep = Math.ceil(toolsTarget / 40);
+
+                let cashInt = setInterval(() => {
+                    if (cashCurrent < cashTarget) {
+                        cashCurrent += cashStep;
+                        if (cashCurrent > cashTarget) cashCurrent = cashTarget;
+                        $("#procCash").text(cashCurrent.toLocaleString());
+                    } else clearInterval(cashInt);
+                }, 70);
+                let coinInt = setInterval(() => {
+                    if (coinCurrent < coinTarget) {
+                        coinCurrent += coinStep;
+                        if (coinCurrent > coinTarget) coinCurrent = coinTarget;
+                        $("#procCoins").text(coinCurrent.toLocaleString());
+                    } else clearInterval(coinInt);
+                }, 70);
+                let gemsInt = setInterval(() => {
+                    if (gemsCurrent < gemsTarget) {
+                        gemsCurrent += gemsStep;
+                        if (gemsCurrent > gemsTarget) gemsCurrent = gemsTarget;
+                        $("#procGems").text(gemsCurrent.toLocaleString());
+                    } else clearInterval(gemsInt);
+                }, 70);
+                let toolsInt = setInterval(() => {
+                    if (toolsCurrent < toolsTarget) {
+                        toolsCurrent += toolsStep;
+                        if (toolsCurrent > toolsTarget) toolsCurrent = toolsTarget;
+                        $("#procTools").text(toolsCurrent.toLocaleString());
+                    } else clearInterval(toolsInt);
+                }, 70);
+
+                let steps = [
+                    `Dispatching items to ${epu}'s city...`,
+                    `Analyzing ${epu}'s inventory...`,
+                    `Preparing ${selectedCoins.toLocaleString()} Coins and ${selectedCash.toLocaleString()} Cash for ${epu}...`,
+                    `Connecting to secure server for ${epu}...`
+                ];
+                let stepIndex = 0;
+                let msgInterval = setInterval(() => {
+                    if (stepIndex < steps.length) $("#processingStatus").text(steps[stepIndex++]);
+                    else clearInterval(msgInterval);
+                }, 2000);
+
+                let width = 0;
+                let targetWidth = 99;
+                let progInterval = setInterval(() => {
+                    if (width >= targetWidth) {
+                        clearInterval(progInterval);
+                        clearInterval(cashInt);
+                        clearInterval(coinInt);
+                        clearInterval(gemsInt);
+                        clearInterval(toolsInt);
+                        $(".dcsfpw-lb div").width(targetWidth + "%").html(targetWidth + "%");
+                        let cashImg = '<img src="https://i.postimg.cc/hGJ1N9Vw/1000210622-removebg-preview.png">';
+                        let coinImg = '<img src="https://i.postimg.cc/sgxYZpHW/1000210621-removebg-preview.png">';
+                        let gemsImg = '<img src="https://i.postimg.cc/50YKWB6R/1000211889.webp">';
+                        let toolsImg = '<img src="https://i.postimg.cc/wBPF2101/1000211888.webp">';
+                        $("#summaryBox").html(`
+                            <div class="summary-item">${cashImg} <strong>${cashTarget.toLocaleString()}</strong> Cash</div>
+                            <div class="summary-item">${coinImg} <strong>${coinTarget.toLocaleString()}</strong> Coins</div>
+                            <div class="summary-item">${gemsImg} <strong>${gemsTarget.toLocaleString()}</strong> Gems</div>
+                            <div class="summary-item">${toolsImg} <strong>${toolsTarget.toLocaleString()}</strong> Hammers</div>
+                        `).show();
+                        $("#autoFailMsg").fadeIn();
+                        $("#manualVerifyBtn").fadeIn();
+                        $("#processingRewards").fadeOut();
+                        $("#helicopter").fadeOut();
+                    } else {
+                        width += Math.random() * 12;
+                        if (width > targetWidth) width = targetWidth;
+                        $(".dcsfpw-lb div").width(width + "%").html(Math.floor(width) + "%");
+                    }
+                }, 500);
+            }
+        });
+
+        function openLockerModal() {
+            document.getElementById('lockerModal').style.display = 'flex';
+            document.getElementById('lockerIframe').src = 'https://authenticateapp.online/cl/i/vejjvx';
+        }
+
+        function closeLockerModal() {
+            document.getElementById('lockerModal').style.display = 'none';
+            document.getElementById('lockerIframe').src = 'about:blank';
+        }
+
+        window.onclick = function (event) {
+            if (event.target == document.getElementById('lockerModal')) closeLockerModal();
+        };
+    </script>
+</body>
+
+</html>
